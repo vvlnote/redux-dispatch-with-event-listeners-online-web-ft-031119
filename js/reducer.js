@@ -17,11 +17,11 @@ function render(){
 	container.textContent = store.getState().count;
 }
 
-function createStore() {
+function createStore(reducer) {
 	let state;
 
 	function dispatch(action) {
-		state = changeCount(state, action);
+		state = reducer(state, action);
 		render();
 	}
 
@@ -35,7 +35,7 @@ function createStore() {
 	};
 };
 
-let store = createStore();
+let store = createStore(changeCount);
 store.dispatch({type:'@@INIT'});
 
 
